@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PasswordGeneratorShould {
 
@@ -22,22 +22,10 @@ class PasswordGeneratorShould {
         assertTrue(true);
     }
 
-    @Test
-    public void generatePasswordWith5Charachters() {
-
-        password = generator.generate(5);
-        assertEquals(5, password.length());
-    }
-
-    @Test
-    public void generatePasswordWith10Charachters() {
-        password = generator.generate(10);
-        assertEquals(10, password.length());
-    }
 
     @Test
     public void generatePasswordWithAtLeast1Number() {
-        password = generator.generate(10);
+        password = generator.generate();
         Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(password);
         assertTrue(matcher.find());
@@ -45,9 +33,42 @@ class PasswordGeneratorShould {
 
     @Test
     public void generatePasswordWithAtLeast1Letter() {
-        password = generator.generate(10);
+        password = generator.generate();
         Pattern pattern = Pattern.compile("[a-z]+");
         Matcher matcher = pattern.matcher(password);
-        //assertTrue(matcher.find());
+        assertTrue(matcher.find());
     }
+
+    @Test
+    public void generatePasswordWithAtLeast1SpecialSymbol() {
+        password = generator.generate();
+        Pattern pattern = Pattern.compile("[!@#$]+");
+        Matcher matcher = pattern.matcher(password);
+        assertTrue(matcher.find());
+    }
+
+    @Test
+    public void generatePasswordWithAtLeast1OfEachTypeOfCharachter() {
+
+        password = generator.generate();
+        System.out.println(password);
+
+        Pattern pattern = Pattern.compile("[a-z]+");
+        Matcher matcher = pattern.matcher(password);
+        assertTrue(matcher.find());
+
+        pattern = Pattern.compile("[!@#$]+");
+        matcher = pattern.matcher(password);
+        assertTrue(matcher.find());
+
+        pattern = Pattern.compile("[A-Z]+");
+        matcher = pattern.matcher(password);
+        assertTrue(matcher.find());
+
+        pattern = Pattern.compile("[0-9]+");
+        matcher = pattern.matcher(password);
+        assertTrue(matcher.find());
+
+    }
+
 }
