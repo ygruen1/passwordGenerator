@@ -48,7 +48,7 @@ class PasswordGeneratorShould {
     }
 
     @Test
-    public void generatePasswordWithAtLeast1OfEachTypeOfCharachter() {
+    public void generatePasswordWithAtLeast1ofEachTypeOfCharachter() {
 
         password = generator.generate();
         System.out.println(password);
